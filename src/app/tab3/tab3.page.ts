@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LocationsService } from "../services/locations.service";
 
 @Component({
   selector: 'app-tab3',
@@ -6,7 +7,22 @@ import { Component } from '@angular/core';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  Locations:any = [];
 
-  constructor() {}
+  constructor(
+    private locService: LocationsService
+  ) {}
+
+  ngOnInit(): void {
+    this.getLocations();
+  }
+
+  getLocations(){
+    this.locService.getLocations().subscribe(locs => {
+      console.log(locs);
+
+      this.Locations = locs;
+    });
+  }
 
 }
